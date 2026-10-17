@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Victoria — A-frame kućica na Zlatiboru</title>
+<meta name="description" content="Victoria — luksuzna A-frame glamping kućica na Zlatiboru.">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&amp;family=Hanken+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#f3ece1;color:#2a2119;font-family:'Hanken Grotesk',sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#93582d}
+a:hover{color:#774520}
+::selection{background:#93582d;color:#f3ece1}
+input,select,textarea{color-scheme:light}
+input::placeholder,textarea::placeholder{color:#9a8b78}
+</style>
+</helmet>
+
+<div style="background:#f3ece1;color:#2a2119;min-height:100vh">
+
+<header style="position:fixed;top:0;left:0;right:0;z-index:50;background:{{ navBg }};backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid {{ navBorder }};transition:background .4s ease, border-color .4s ease">
+  <div style="max-width:1360px;margin:0 auto;padding:18px clamp(20px,4vw,48px);display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="#top" style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:400;color:{{ navInk }};text-decoration:none;letter-spacing:0.04em;line-height:1">Victoria</a>
+    <sc-if value="{{ isWide }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;gap:30px;font-size:13px;letter-spacing:0.14em;text-transform:uppercase">
+        <a href="#kucica" style="color:{{ navInk }};text-decoration:none" style-hover="color:{{ navAccent }}">Kućica</a>
+        <a href="#galerija" style="color:{{ navInk }};text-decoration:none" style-hover="color:{{ navAccent }}">Galerija</a>
+        <a href="#cene" style="color:{{ navInk }};text-decoration:none" style-hover="color:{{ navAccent }}">Cene</a>
+        <a href="#okolina" style="color:{{ navInk }};text-decoration:none" style-hover="color:{{ navAccent }}">Okolina</a>
+        <a href="#lokacija" style="color:{{ navInk }};text-decoration:none" style-hover="color:{{ navAccent }}">Lokacija</a>
+        <a href="#pitanja" style="color:{{ navInk }};text-decoration:none" style-hover="color:{{ navAccent }}">Pitanja</a>
+      </nav>
+      <a href="#upit" style="padding:12px 22px;border:1px solid {{ navAccent }};color:{{ navAccent }};text-decoration:none;font-size:13px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;border-radius:2px;transition:all .25s" style-hover="background:{{ navAccent }};color:#f3ece1">Rezerviši</a>
+    </sc-if>
+    <sc-if value="{{ isNarrow }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleMenu }}" style="background:none;border:1px solid {{ navLine }};color:{{ navInk }};padding:12px 18px;min-height:44px;font:600 12px 'Hanken Grotesk',sans-serif;letter-spacing:0.18em;text-transform:uppercase;border-radius:2px;cursor:pointer">{{ menuLabel }}</button>
+    </sc-if>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav style="display:flex;flex-direction:column;padding:8px clamp(20px,4vw,48px) 28px;font-family:'Cormorant Garamond',serif;font-size:32px">
+      <a href="#kucica" onClick="{{ closeMenu }}" style="color:{{ navInk }};text-decoration:none;padding:10px 0;border-bottom:1px solid #ddd2c1">Kućica</a>
+      <a href="#galerija" onClick="{{ closeMenu }}" style="color:{{ navInk }};text-decoration:none;padding:10px 0;border-bottom:1px solid #ddd2c1">Galerija</a>
+      <a href="#cene" onClick="{{ closeMenu }}" style="color:{{ navInk }};text-decoration:none;padding:10px 0;border-bottom:1px solid #ddd2c1">Cene</a>
+      <a href="#okolina" onClick="{{ closeMenu }}" style="color:{{ navInk }};text-decoration:none;padding:10px 0;border-bottom:1px solid #ddd2c1">Okolina</a>
+      <a href="#lokacija" onClick="{{ closeMenu }}" style="color:{{ navInk }};text-decoration:none;padding:10px 0;border-bottom:1px solid #ddd2c1">Lokacija</a>
+      <a href="#pitanja" onClick="{{ closeMenu }}" style="color:{{ navInk }};text-decoration:none;padding:10px 0;border-bottom:1px solid #ddd2c1">Pitanja</a>
+      <a href="#upit" onClick="{{ closeMenu }}" style="color:{{ navAccent }};text-decoration:none;padding:10px 0">Rezerviši boravak</a>
+    </nav>
+  </sc-if>
+</header>
+
+<sc-if value="{{ heroFull }}" hint-placeholder-val="{{ true }}">
+  <section id="top" data-screen-label="Hero" style="color:#f6f0e6;position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden">
+    <div style="position:absolute;inset:0">
+      <img src="assets/hero.jpg" alt="Kućica noću" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+    </div>
+    <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top, rgba(22,16,11,0.86) 0%, rgba(22,16,11,0.55) 40%, rgba(22,16,11,0.08) 70%, rgba(22,16,11,0.3) 100%)"></div>
+    <div style="position:relative;pointer-events:none;width:100%;max-width:1360px;margin:0 auto;padding:160px clamp(20px,4vw,48px) clamp(56px,8vw,96px)">
+      <div style="display:flex;align-items:center;gap:16px;color:#f0c898;font-size:12px;font-weight:500;letter-spacing:0.28em;text-transform:uppercase">
+        <span>A-frame kućica</span><span style="width:40px;height:1px;background:#f0c898"></span><span>Zlatibor</span>
+      </div>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(56px,10vw,152px);line-height:0.92;letter-spacing:-0.02em;margin:28px 0 0;max-width:12ch;text-wrap:balance">Noć među <em style="font-style:italic;color:#f0c898">borovima.</em></h1>
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:32px;margin-top:40px">
+        <p style="margin:0;max-width:440px;font-size:18px;line-height:1.65;color:#ece3d6;text-wrap:pretty">Privatno utočište na obronku Zlatibora — kamin, zvezdano nebo i tišina koju niko ne remeti.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;pointer-events:auto">
+          <a href="{{ airbnbUrl }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;padding:18px 28px;background:#93582d;color:#f3ece1;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;border-radius:2px;transition:background .25s" style-hover="background:#774520;color:#f3ece1">Rezerviši na Airbnb</a>
+          <a href="{{ bookingUrl }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;padding:18px 28px;border:1px solid rgba(246,240,230,0.6);color:#f6f0e6;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;border-radius:2px;transition:border-color .25s" style-hover="border-color:#f0c898;color:#f6f0e6">Booking.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ heroSplit }}" hint-placeholder-val="{{ false }}">
+  <section id="top" data-screen-label="Hero" style="max-width:1360px;margin:0 auto;padding:120px clamp(20px,4vw,48px) 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(32px,5vw,72px);align-items:end;min-height:100vh">
+    <div style="padding-bottom:clamp(0px,4vw,56px)">
+      <div style="display:flex;align-items:center;gap:16px;color:#93582d;font-size:12px;font-weight:500;letter-spacing:0.28em;text-transform:uppercase">
+        <span>A-frame kućica</span><span style="width:40px;height:1px;background:#93582d"></span><span>Zlatibor</span>
+      </div>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(56px,8vw,128px);line-height:0.92;letter-spacing:-0.02em;margin:28px 0 0;text-wrap:balance">Noć među <em style="font-style:italic;color:#8a5a36">borovima.</em></h1>
+      <p style="margin:36px 0 0;max-width:440px;font-size:18px;line-height:1.65;color:#4a3d31;text-wrap:pretty">Privatno utočište na obronku Zlatibora — kamin, zvezdano nebo i tišina koju niko ne remeti.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:40px">
+        <a href="{{ airbnbUrl }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;padding:18px 28px;background:#93582d;color:#f3ece1;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;border-radius:2px;transition:background .25s" style-hover="background:#774520;color:#f3ece1">Rezerviši na Airbnb</a>
+        <a href="{{ bookingUrl }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;padding:18px 28px;border:1px solid rgba(42,33,25,0.45);color:#2a2119;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;border-radius:2px;transition:border-color .25s" style-hover="border-color:#93582d;color:#2a2119">Booking.com</a>
+      </div>
+    </div>
+    <div style="position:relative;height:min(82vh,860px);min-height:460px">
+      <img src="assets/hero.jpg" alt="Kućica noću" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+    </div>
+  </section>
+</sc-if>
+
+<section id="kucica" data-screen-label="01 Kućica" style="scroll-margin-top:64px;max-width:1360px;margin:0 auto;padding:clamp(96px,12vw,168px) clamp(20px,4vw,48px)">
+  <div style="display:flex;align-items:center;gap:16px;color:#93582d;font-size:12px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase"><span>01</span><span style="width:40px;height:1px;background:#93582d"></span><span>Kućica</span></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(48px,7vw,112px);margin-top:28px;align-items:start">
+    <div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.5vw,76px);line-height:1.02;letter-spacing:-0.01em;margin:0;text-wrap:balance">Arhitektura koja se povlači pred <em style="font-style:italic;color:#8a5a36">prirodom.</em></h2>
+      <p style="margin:36px 0 0;max-width:520px;font-size:18px;line-height:1.75;color:#6b5d4f;text-wrap:pretty">Victoria je jedna jedina kućica, podignuta za one koji traže više od smeštaja. Strmi drveni krov, staklo do slemena i pogled koji se menja s maglom — sve je osmišljeno da vreme ovde teče sporije.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border-top:1px solid #d3c6b2">
+      <div style="padding:26px 24px 26px 0;border-bottom:1px solid #d3c6b2">
+        <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#6b5d4f">Gosti</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:30px;margin-top:8px">Do četiri osobe</div>
+      </div>
+      <div style="padding:26px 24px 26px 0;border-bottom:1px solid #d3c6b2">
+        <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#6b5d4f">Spavanje</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:30px;margin-top:8px">Bračni krevet i galerija</div>
+      </div>
+      <div style="padding:26px 24px 26px 0;border-bottom:1px solid #d3c6b2">
+        <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#6b5d4f">Toplina</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:30px;margin-top:8px">Kamin na drva</div>
+      </div>
+      <div style="padding:26px 24px 26px 0;border-bottom:1px solid #d3c6b2">
+        <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#6b5d4f">Terasa</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:30px;margin-top:8px">Hot tub pod zvezdama</div>
+      </div>
+      <div style="padding:26px 24px 26px 0;border-bottom:1px solid #d3c6b2">
+        <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#6b5d4f">Kuhinja</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:30px;margin-top:8px">Potpuno opremljena</div>
+      </div>
+      <div style="padding:26px 24px 26px 0;border-bottom:1px solid #d3c6b2">
+        <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#6b5d4f">Privatnost</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:30px;margin-top:8px">Bez komšija na vidiku</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="galerija" data-screen-label="02 Galerija" style="scroll-margin-top:64px;max-width:1360px;margin:0 auto;padding:0 clamp(20px,4vw,48px) clamp(96px,12vw,168px)">
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px">
+    <div>
+      <div style="display:flex;align-items:center;gap:16px;color:#93582d;font-size:12px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase"><span>02</span><span style="width:40px;height:1px;background:#93582d"></span><span>Galerija</span></div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.5vw,76px);line-height:1.02;letter-spacing:-0.01em;margin:24px 0 0">Svetlost, drvo, <em style="font-style:italic;color:#8a5a36">tišina.</em></h2>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-top:56px">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:12px">
+      <div style="position:relative;flex:1 1 300px;min-width:0;aspect-ratio:3/2"><img src="assets/dnevna-soba.jpg" alt="Dnevni boravak sa kaminom" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="position:relative;flex:1 1 300px;min-width:0;aspect-ratio:3/2"><img src="assets/potkrovlje.jpg" alt="Spavaća soba u potkrovlju" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:12px">
+      <div style="position:relative;flex:1 1 300px;min-width:0;aspect-ratio:3/2"><img src="assets/terasa.jpg" alt="Kafa na terasi u sumrak" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="position:relative;flex:1 1 300px;min-width:0;aspect-ratio:3/2"><img src="assets/kuhinja.jpg" alt="Kuhinja i trpezarija" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="position:relative;flex:1 1 300px;min-width:0;aspect-ratio:3/2"><img src="assets/zima.jpg" alt="Kućica u snegu" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></div>
+    </div>
+  </div>
+</section>
+
+<section id="cene" data-screen-label="03 Cene" style="scroll-margin-top:64px;background:#ebe2d4;border-top:1px solid #ddd2c1;border-bottom:1px solid #ddd2c1">
+  <div style="max-width:1360px;margin:0 auto;padding:clamp(96px,12vw,160px) clamp(20px,4vw,48px)">
+    <div style="display:flex;align-items:center;gap:16px;color:#93582d;font-size:12px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase"><span>03</span><span style="width:40px;height:1px;background:#93582d"></span><span>Cene i sezone</span></div>
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 48px;margin-top:24px">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.5vw,76px);line-height:1.02;letter-spacing:-0.01em;margin:0">Svako godišnje doba <em style="font-style:italic;color:#8a5a36">ima svoj ritam.</em></h2>
+      <p style="margin:0;max-width:360px;font-size:16px;line-height:1.7;color:#6b5d4f">Cene su po noći, za celu kućicu i do četiri gosta.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:1px;background:#d3c6b2;border:1px solid #d3c6b2;margin-top:64px">
+      <div style="background:#ebe2d4;padding:clamp(28px,3vw,44px);display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-style:italic">Zima</div>
+          <div style="font-size:13px;color:#6b5d4f">15. dec — 15. mar</div>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:10px;margin-top:20px"><span style="font-size:14px;color:#6b5d4f">od</span><span style="font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:300;line-height:1;color:#8a5a36">160 €</span></div>
+        <div style="font-size:15px;line-height:1.6;color:#6b5d4f;border-top:1px solid #d3c6b2;padding-top:20px">Minimalno 2 noći · praznici 3 noći</div>
+      </div>
+      <div style="background:#ebe2d4;padding:clamp(28px,3vw,44px);display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-style:italic">Leto</div>
+          <div style="font-size:13px;color:#6b5d4f">jun — avgust</div>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:10px;margin-top:20px"><span style="font-size:14px;color:#6b5d4f">od</span><span style="font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:300;line-height:1;color:#8a5a36">140 €</span></div>
+        <div style="font-size:15px;line-height:1.6;color:#6b5d4f;border-top:1px solid #d3c6b2;padding-top:20px">Minimalno 2 noći</div>
+      </div>
+      <div style="background:#ebe2d4;padding:clamp(28px,3vw,44px);display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-style:italic">Proleće i jesen</div>
+          <div style="font-size:13px;color:#6b5d4f">van sezone</div>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:10px;margin-top:20px"><span style="font-size:14px;color:#6b5d4f">od</span><span style="font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:300;line-height:1;color:#8a5a36">110 €</span></div>
+        <div style="font-size:15px;line-height:1.6;color:#6b5d4f;border-top:1px solid #d3c6b2;padding-top:20px">Minimalno 2 noći</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;margin-top:40px">
+      <p style="margin:0;font-size:15px;line-height:1.7;color:#6b5d4f;max-width:560px">Novogodišnji paketi i duži boravci — na upit. Konačna cena i dostupnost prikazani su na platformi za rezervaciju.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a href="{{ airbnbUrl }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;padding:16px 24px;background:#93582d;color:#f3ece1;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;border-radius:2px" style-hover="background:#774520;color:#f3ece1">Proveri termine</a>
+        <a href="#upit" style="display:inline-flex;align-items:center;padding:16px 24px;border:1px solid rgba(42,33,25,0.45);color:#2a2119;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;border-radius:2px" style-hover="border-color:#93582d;color:#2a2119">Pošalji upit</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="okolina" data-screen-label="04 Okolina" style="scroll-margin-top:64px;max-width:1360px;margin:0 auto;padding:clamp(96px,12vw,168px) clamp(20px,4vw,48px)">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(48px,7vw,112px);align-items:start">
+    <div style="position:sticky;top:96px">
+      <div style="display:flex;align-items:center;gap:16px;color:#93582d;font-size:12px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase"><span>04</span><span style="width:40px;height:1px;background:#93582d"></span><span>Okolina i aktivnosti</span></div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.5vw,76px);line-height:1.02;letter-spacing:-0.01em;margin:24px 0 0;text-wrap:balance">Planina na <em style="font-style:italic;color:#8a5a36">dohvat ruke.</em></h2>
+      <div style="position:relative;aspect-ratio:4/5;margin-top:48px;max-height:560px">
+        <img src="assets/kabina-dan.jpg" alt="Zlatiborski predeo" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+      </div>
+    </div>
+    <ol style="list-style:none;margin:0;padding:0;border-top:1px solid #d3c6b2">
+      <li style="display:grid;grid-template-columns:56px 1fr;gap:16px;padding:32px 0;border-bottom:1px solid #d3c6b2">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:#93582d">i.</span>
+        <div><div style="font-family:'Cormorant Garamond',serif;font-size:32px;line-height:1.1">Gold Gondola</div><p style="margin:10px 0 0;font-size:16px;line-height:1.7;color:#6b5d4f">Panoramska gondola od centra Zlatibora do vrha Tornika — jedna od najdužih na svetu.</p></div>
+      </li>
+      <li style="display:grid;grid-template-columns:56px 1fr;gap:16px;padding:32px 0;border-bottom:1px solid #d3c6b2">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:#93582d">ii.</span>
+        <div><div style="font-family:'Cormorant Garamond',serif;font-size:32px;line-height:1.1">Ski centar Tornik</div><p style="margin:10px 0 0;font-size:16px;line-height:1.7;color:#6b5d4f">Staze za početnike i iskusne skijaše na najvišem vrhu Zlatibora.</p></div>
+      </li>
+      <li style="display:grid;grid-template-columns:56px 1fr;gap:16px;padding:32px 0;border-bottom:1px solid #d3c6b2">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:#93582d">iii.</span>
+        <div><div style="font-family:'Cormorant Garamond',serif;font-size:32px;line-height:1.1">Stopića pećina</div><p style="margin:10px 0 0;font-size:16px;line-height:1.7;color:#6b5d4f">Pećina kroz koju protiče reka, sa čuvenim sedrenim kadama.</p></div>
+      </li>
+      <li style="display:grid;grid-template-columns:56px 1fr;gap:16px;padding:32px 0;border-bottom:1px solid #d3c6b2">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:#93582d">iv.</span>
+        <div><div style="font-family:'Cormorant Garamond',serif;font-size:32px;line-height:1.1">Gostiljski vodopad</div><p style="margin:10px 0 0;font-size:16px;line-height:1.7;color:#6b5d4f">Vodopad u selu Gostilje, okružen šetnim stazama i livadama.</p></div>
+      </li>
+      <li style="display:grid;grid-template-columns:56px 1fr;gap:16px;padding:32px 0;border-bottom:1px solid #d3c6b2">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:#93582d">v.</span>
+        <div><div style="font-family:'Cormorant Garamond',serif;font-size:32px;line-height:1.1">Sirogojno</div><p style="margin:10px 0 0;font-size:16px;line-height:1.7;color:#6b5d4f">Muzej na otvorenom „Staro selo“ i ručno pleteni zlatiborski džemperi.</p></div>
+      </li>
+      <li style="display:grid;grid-template-columns:56px 1fr;gap:16px;padding:32px 0;border-bottom:1px solid #d3c6b2">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:#93582d">vi.</span>
+        <div><div style="font-family:'Cormorant Garamond',serif;font-size:32px;line-height:1.1">Šargan osmica</div><p style="margin:10px 0 0;font-size:16px;line-height:1.7;color:#6b5d4f">Muzejska pruga kroz tunele i vijadukte Mokre Gore.</p></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="utisci" data-screen-label="05 Utisci" style="scroll-margin-top:64px;background:#ebe2d4;border-top:1px solid #ddd2c1;border-bottom:1px solid #ddd2c1">
+  <div style="max-width:1360px;margin:0 auto;padding:clamp(96px,12vw,160px) clamp(20px,4vw,48px)">
+    <div style="display:flex;align-items:center;gap:16px;color:#93582d;font-size:12px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase"><span>05</span><span style="width:40px;height:1px;background:#93582d"></span><span>Utisci gostiju</span></div>
+    <blockquote style="margin:40px 0 0;max-width:1080px">
+      <p style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(34px,4.6vw,64px);line-height:1.14;letter-spacing:-0.01em;text-wrap:balance">„Probudili smo se iznad oblaka, uz pucketanje vatre. Retko gde se ovako potpuno isključiš.“</p>
+      <footer style="margin-top:28px;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:#6b5d4f">Milica i Stefan · Beograd · Airbnb</footer>
+    </blockquote>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(32px,4vw,64px);margin-top:clamp(64px,8vw,104px);padding-top:48px;border-top:1px solid #d3c6b2">
+      <blockquote style="margin:0">
+        <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:26px;line-height:1.4;text-wrap:pretty">„Svaki detalj je pažljivo izabran — od posteljine do šoljica. Hot tub dok pada sneg je nešto što ćemo dugo pamtiti.“</p>
+        <footer style="margin-top:20px;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:#6b5d4f">Ana · Novi Sad · Booking.com</footer>
+      </blockquote>
+      <blockquote style="margin:0">
+        <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:26px;line-height:1.4;text-wrap:pretty">„Mir, privatnost i domaćini koji misle na sve. Došli smo na vikend, a već planiramo zimu.“</p>
+        <footer style="margin-top:20px;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:#6b5d4f">Jelena i Marko · Kragujevac · Airbnb</footer>
+      </blockquote>
+    </div>
+    <div style="display:flex;margin-top:clamp(56px,6vw,80px)">
+      <a href="utisci.html" style="display:inline-flex;align-items:center;gap:14px;padding:16px 28px;min-height:48px;border:1px solid #93582d;color:#93582d;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;border-radius:2px;transition:all .25s" style-hover="background:#93582d;color:#f3ece1">Pogledaj više utisaka <span style="font-size:16px;letter-spacing:0">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="lokacija" data-screen-label="06 Lokacija" style="scroll-margin-top:64px;max-width:1360px;margin:0 auto;padding:clamp(96px,12vw,168px) clamp(20px,4vw,48px)">
+  <div style="display:flex;align-items:center;gap:16px;color:#93582d;font-size:12px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase"><span>06</span><span style="width:40px;height:1px;background:#93582d"></span><span>Mapa i kako stići</span></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(40px,6vw,96px);margin-top:24px;align-items:start">
+    <div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.5vw,76px);line-height:1.02;letter-spacing:-0.01em;margin:0;text-wrap:balance">Daleko od grada, <em style="font-style:italic;color:#8a5a36">blizu svega.</em></h2>
+      <p style="margin:32px 0 0;max-width:460px;font-size:17px;line-height:1.75;color:#6b5d4f;text-wrap:pretty">Tačnu lokaciju i detaljno uputstvo za dolazak šaljemo nakon potvrde rezervacije.</p>
+      <div style="margin-top:40px;border-top:1px solid #d3c6b2">
+        <div style="display:flex;justify-content:space-between;gap:16px;padding:20px 0;border-bottom:1px solid #d3c6b2;font-size:16px"><span>Beograd</span><span style="color:#6b5d4f">≈ 3 h vožnje</span></div>
+        <div style="display:flex;justify-content:space-between;gap:16px;padding:20px 0;border-bottom:1px solid #d3c6b2;font-size:16px"><span>Novi Sad</span><span style="color:#6b5d4f">≈ 4 h vožnje</span></div>
+        <div style="display:flex;justify-content:space-between;gap:16px;padding:20px 0;border-bottom:1px solid #d3c6b2;font-size:16px"><span>Aerodrom Ponikve</span><span style="color:#6b5d4f">≈ 30 min</span></div>
+      </div>
+      <p style="margin:24px 0 0;font-size:15px;line-height:1.7;color:#6b5d4f">Zimi preporučujemo zimske gume i lance u gepeku.</p>
+    </div>
+    <div style="position:relative;aspect-ratio:4/3;width:100%;min-width:0;border:1px solid #d3c6b2;overflow:hidden;background:#ebe2d4">
+      <iframe title="Mapa — Zlatibor" src="https://www.google.com/maps?q=Zlatibor&amp;z=11&amp;output=embed" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:0;filter:saturate(0.35) sepia(0.25) contrast(0.95)"></iframe>
+    </div>
+  </div>
+</section>
+
+<section id="pitanja" data-screen-label="07 Pitanja" style="scroll-margin-top:64px;max-width:1360px;margin:0 auto;padding:0 clamp(20px,4vw,48px) clamp(96px,12vw,168px)">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(40px,6vw,96px);align-items:start">
+    <div>
+      <div style="display:flex;align-items:center;gap:16px;color:#93582d;font-size:12px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase"><span>07</span><span style="width:40px;height:1px;background:#93582d"></span><span>Česta pitanja</span></div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.5vw,76px);line-height:1.02;letter-spacing:-0.01em;margin:24px 0 0">Pre <em style="font-style:italic;color:#8a5a36">dolaska.</em></h2>
+    </div>
+    <div style="border-top:1px solid #d3c6b2">
+      <div style="border-bottom:1px solid #d3c6b2">
+        <button onClick="{{ toggle.f0 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px;background:none;border:0;color:#2a2119;padding:26px 0;cursor:pointer;text-align:left;font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.2" style-hover="color:#8a5a36"><span>Kada je prijava i odjava?</span><span style="font-family:'Hanken Grotesk',sans-serif;font-size:22px;font-weight:300;color:#93582d;flex-shrink:0">{{ icon.f0 }}</span></button>
+        <sc-if value="{{ open.f0 }}" hint-placeholder-val="{{ true }}"><p style="margin:0;padding:0 48px 28px 0;font-size:16px;line-height:1.75;color:#6b5d4f">Prijava je od 15 časova, odjava do 11. Raniji dolazak ili kasniji odlazak — po dogovoru, kada termin to dozvoljava.</p></sc-if>
+      </div>
+      <div style="border-bottom:1px solid #d3c6b2">
+        <button onClick="{{ toggle.f1 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px;background:none;border:0;color:#2a2119;padding:26px 0;cursor:pointer;text-align:left;font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.2" style-hover="color:#8a5a36"><span>Šta je uključeno u cenu?</span><span style="font-family:'Hanken Grotesk',sans-serif;font-size:22px;font-weight:300;color:#93582d;flex-shrink:0">{{ icon.f1 }}</span></button>
+        <sc-if value="{{ open.f1 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 48px 28px 0;font-size:16px;line-height:1.75;color:#6b5d4f">Posteljina, peškiri i ogrtači, ogrevno drvo za kamin, korišćenje hot tuba i Wi‑Fi.</p></sc-if>
+      </div>
+      <div style="border-bottom:1px solid #d3c6b2">
+        <button onClick="{{ toggle.f2 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px;background:none;border:0;color:#2a2119;padding:26px 0;cursor:pointer;text-align:left;font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.2" style-hover="color:#8a5a36"><span>Da li je moguć doručak?</span><span style="font-family:'Hanken Grotesk',sans-serif;font-size:22px;font-weight:300;color:#93582d;flex-shrink:0">{{ icon.f2 }}</span></button>
+        <sc-if value="{{ open.f2 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 48px 28px 0;font-size:16px;line-height:1.75;color:#6b5d4f">Na zahtev pripremamo korpu sa lokalnim proizvodima — zlatiborski sir, kajmak, pršuta i domaći hleb.</p></sc-if>
+      </div>
+      <div style="border-bottom:1px solid #d3c6b2">
+        <button onClick="{{ toggle.f3 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px;background:none;border:0;color:#2a2119;padding:26px 0;cursor:pointer;text-align:left;font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.2" style-hover="color:#8a5a36"><span>Da li je prilaz moguć zimi?</span><span style="font-family:'Hanken Grotesk',sans-serif;font-size:22px;font-weight:300;color:#93582d;flex-shrink:0">{{ icon.f3 }}</span></button>
+        <sc-if value="{{ open.f3 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 48px 28px 0;font-size:16px;line-height:1.75;color:#6b5d4f">Da. Put do kućice se redovno čisti, a parking je odmah pored ulaza. Preporučujemo zimsku opremu.</p></sc-if>
+      </div>
+      <div style="border-bottom:1px solid #d3c6b2">
+        <button onClick="{{ toggle.f4 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px;background:none;border:0;color:#2a2119;padding:26px 0;cursor:pointer;text-align:left;font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.2" style-hover="color:#8a5a36"><span>Da li su ljubimci dozvoljeni?</span><span style="font-family:'Hanken Grotesk',sans-serif;font-size:22px;font-weight:300;color:#93582d;flex-shrink:0">{{ icon.f4 }}</span></button>
+        <sc-if value="{{ open.f4 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 48px 28px 0;font-size:16px;line-height:1.75;color:#6b5d4f">Mali ljubimci su dobrodošli uz prethodnu najavu.</p></sc-if>
+      </div>
+      <div style="border-bottom:1px solid #d3c6b2">
+        <button onClick="{{ toggle.f5 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px;background:none;border:0;color:#2a2119;padding:26px 0;cursor:pointer;text-align:left;font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.2" style-hover="color:#8a5a36"><span>Kakva su pravila otkazivanja?</span><span style="font-family:'Hanken Grotesk',sans-serif;font-size:22px;font-weight:300;color:#93582d;flex-shrink:0">{{ icon.f5 }}</span></button>
+        <sc-if value="{{ open.f5 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 48px 28px 0;font-size:16px;line-height:1.75;color:#6b5d4f">Važe pravila platforme preko koje ste rezervisali — Airbnb ili Booking.com.</p></sc-if>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="upit" data-screen-label="08 Upit" style="scroll-margin-top:64px;position:relative;border-top:1px solid #ddd2c1;background:#ebe2d4">
+  <div style="max-width:1360px;margin:0 auto;padding:clamp(96px,12vw,160px) clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(48px,7vw,112px);align-items:start">
+    <div>
+      <div style="display:flex;align-items:center;gap:16px;color:#93582d;font-size:12px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase"><span>08</span><span style="width:40px;height:1px;background:#93582d"></span><span>Rezervacija</span></div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,88px);line-height:0.98;letter-spacing:-0.015em;margin:24px 0 0;text-wrap:balance">Vaš boravak <em style="font-style:italic;color:#8a5a36">počinje ovde.</em></h2>
+      <p style="margin:32px 0 0;max-width:440px;font-size:17px;line-height:1.75;color:#6b5d4f;text-wrap:pretty">Rezervišite direktno preko platforme ili nam pišite — za posebne prilike, duže boravke i sva pitanja.</p>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:40px;max-width:380px">
+        <a href="{{ airbnbUrl }}" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;align-items:center;padding:20px 24px;background:#93582d;color:#f3ece1;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;border-radius:2px" style-hover="background:#774520;color:#f3ece1"><span>Rezerviši na Airbnb</span><span>→</span></a>
+        <a href="{{ bookingUrl }}" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border:1px solid rgba(42,33,25,0.45);color:#2a2119;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;border-radius:2px" style-hover="border-color:#93582d;color:#2a2119"><span>Rezerviši na Booking.com</span><span>→</span></a>
+      </div>
+    </div>
+
+    <div style="border:1px solid #d3c6b2;padding:clamp(28px,4vw,48px);background:#f3ece1">
+      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ onSubmit }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:28px 24px">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:32px;grid-column:1/-1">Pošaljite upit</div>
+          <label style="display:flex;flex-direction:column;gap:8px;grid-column:1/-1"><span style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#6b5d4f">Ime i prezime</span><input required="" name="ime" type="text" style="background:transparent;border:0;border-bottom:1px solid #bfae96;color:#2a2119;font:16px 'Hanken Grotesk',sans-serif;padding:12px 0;outline:none" style-focus="border-bottom-color:#93582d"></label>
+          <label style="display:flex;flex-direction:column;gap:8px;grid-column:1/-1"><span style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#6b5d4f">Email ili telefon</span><input required="" name="kontakt" type="text" style="background:transparent;border:0;border-bottom:1px solid #bfae96;color:#2a2119;font:16px 'Hanken Grotesk',sans-serif;padding:12px 0;outline:none" style-focus="border-bottom-color:#93582d"></label>
+          <label style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#6b5d4f">Dolazak</span><input name="dolazak" type="date" style="background:transparent;border:0;border-bottom:1px solid #bfae96;color:#2a2119;font:16px 'Hanken Grotesk',sans-serif;padding:12px 0;outline:none" style-focus="border-bottom-color:#93582d"></label>
+          <label style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#6b5d4f">Odlazak</span><input name="odlazak" type="date" style="background:transparent;border:0;border-bottom:1px solid #bfae96;color:#2a2119;font:16px 'Hanken Grotesk',sans-serif;padding:12px 0;outline:none" style-focus="border-bottom-color:#93582d"></label>
+          <label style="display:flex;flex-direction:column;gap:8px;grid-column:1/-1"><span style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#6b5d4f">Broj gostiju</span><select name="gosti" style="background:transparent;border:0;border-bottom:1px solid #bfae96;color:#2a2119;font:16px 'Hanken Grotesk',sans-serif;padding:12px 0;outline:none;appearance:none;border-radius:0" style-focus="border-bottom-color:#93582d"><option style="background:#f3ece1">2 gosta</option><option style="background:#f3ece1">1 gost</option><option style="background:#f3ece1">3 gosta</option><option style="background:#f3ece1">4 gosta</option></select></label>
+          <label style="display:flex;flex-direction:column;gap:8px;grid-column:1/-1"><span style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#6b5d4f">Poruka</span><textarea name="poruka" rows="3" placeholder="Posebna prilika, pitanja, želje…" style="background:transparent;border:0;border-bottom:1px solid #bfae96;color:#2a2119;font:16px/1.6 'Hanken Grotesk',sans-serif;padding:12px 0;outline:none;resize:vertical" style-focus="border-bottom-color:#93582d"></textarea></label>
+          <button type="submit" style="grid-column:1/-1;margin-top:8px;padding:20px 24px;min-height:44px;background:transparent;border:1px solid #93582d;color:#93582d;font:600 13px 'Hanken Grotesk',sans-serif;letter-spacing:0.14em;text-transform:uppercase;border-radius:2px;cursor:pointer;transition:all .25s" style-hover="background:#93582d;color:#f3ece1">Pošalji upit</button>
+        </form>
+      </sc-if>
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:40px 0;display:flex;flex-direction:column;gap:20px">
+          <div style="width:40px;height:1px;background:#93582d"></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:44px;line-height:1.05">Hvala, <em style="font-style:italic;color:#8a5a36">{{ sentName }}.</em></div>
+          <p style="margin:0;font-size:16px;line-height:1.75;color:#6b5d4f;max-width:380px">Vaš upit je primljen. Javljamo se u roku od 24 sata.</p>
+          <button onClick="{{ reset }}" style="align-self:flex-start;background:none;border:0;padding:12px 0;color:#93582d;font:600 12px 'Hanken Grotesk',sans-serif;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer">Novi upit</button>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+<footer style="border-top:1px solid #ddd2c1">
+  <div style="max-width:1360px;margin:0 auto;padding:56px clamp(20px,4vw,48px) 40px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px">
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:44px;line-height:1;letter-spacing:0.03em">Victoria</div>
+      <div style="margin-top:12px;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#6b5d4f">A-frame kućica · Zlatibor</div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:28px;font-size:13px;letter-spacing:0.14em;text-transform:uppercase">
+      <a href="{{ instagramUrl }}" target="_blank" rel="noopener" style="color:#2a2119;text-decoration:none" style-hover="color:#93582d">Instagram</a>
+      <a href="{{ airbnbUrl }}" target="_blank" rel="noopener" style="color:#2a2119;text-decoration:none" style-hover="color:#93582d">Airbnb</a>
+      <a href="{{ bookingUrl }}" target="_blank" rel="noopener" style="color:#2a2119;text-decoration:none" style-hover="color:#93582d">Booking.com</a>
+    </div>
+    <div style="width:100%;font-size:13px;color:#9a8b78">© 2026 Victoria Glamping</div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;heroLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;full&quot;,&quot;split&quot;],&quot;default&quot;:&quot;full&quot;,&quot;tsType&quot;:&quot;'full'|'split'&quot;,&quot;section&quot;:&quot;Izgled&quot;},&quot;airbnbUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://www.airbnb.com&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Linkovi&quot;},&quot;bookingUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://www.booking.com&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Linkovi&quot;},&quot;instagramUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://www.instagram.com&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Linkovi&quot;}}">
+class Component extends DCLogic {
+  state = { scrolled: false, w: typeof window !== 'undefined' ? window.innerWidth : 1200, menu: false, faq: { f0: true }, sent: false, sentName: '' };
+  componentDidMount() {
+    this.onScroll = () => { const s = window.scrollY > 40; if (s !== this.state.scrolled) this.setState({ scrolled: s }); };
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onResize);
+    this.onScroll();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onResize);
+  }
+  renderVals() {
+    const { scrolled, w, menu, faq, sent, sentName } = this.state;
+    const keys = ['f0', 'f1', 'f2', 'f3', 'f4', 'f5'];
+    const open = {}, icon = {}, toggle = {};
+    keys.forEach(k => {
+      open[k] = !!faq[k];
+      icon[k] = faq[k] ? '−' : '+';
+      toggle[k] = () => this.setState(s => ({ faq: { ...s.faq, [k]: !s.faq[k] } }));
+    });
+    const wide = w >= 980;
+    const solid = scrolled || (menu && !wide);
+    const layout = this.props.heroLayout ?? 'full';
+    return {
+      navBg: solid ? 'rgba(243,236,225,0.88)' : 'rgba(243,236,225,0)',
+      navInk: solid || layout !== 'full' ? '#2a2119' : '#f6f0e6',
+      navAccent: solid || layout !== 'full' ? '#93582d' : '#f0c898',
+      navLine: solid || layout !== 'full' ? 'rgba(42,33,25,0.35)' : 'rgba(246,240,230,0.5)',
+      navBorder: solid ? 'rgba(42,33,25,0.08)' : 'rgba(42,33,25,0)',
+      isWide: wide, isNarrow: !wide, menuOpen: menu && !wide,
+      menuLabel: menu ? 'Zatvori' : 'Meni',
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      closeMenu: () => this.setState({ menu: false }),
+      heroFull: layout === 'full', heroSplit: layout === 'split',
+      airbnbUrl: this.props.airbnbUrl || 'https://www.airbnb.com',
+      bookingUrl: this.props.bookingUrl || 'https://www.booking.com',
+      instagramUrl: this.props.instagramUrl || 'https://www.instagram.com',
+      open, icon, toggle,
+      notSent: !sent, sent, sentName,
+      onSubmit: e => {
+        e.preventDefault();
+        const name = (new FormData(e.target).get('ime') || '').toString().trim().split(' ')[0];
+        this.setState({ sent: true, sentName: name || 'na upitu' });
+      },
+      reset: () => this.setState({ sent: false, sentName: '' })
+    };
+  }
+}
+</script>
+</body>
+</html>
