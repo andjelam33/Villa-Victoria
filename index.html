@@ -202,9 +202,11 @@ input::placeholder,textarea::placeholder{color:#9a8b78}
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(28px,5vw,80px);align-items:start">
     <div style="position:{{ okolinaPos }};top:96px">
       <div style="display:flex;align-items:center;gap:16px;color:#93582d;font-size:12px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase"><span>04</span><span style="width:40px;height:1px;background:#93582d"></span><span>Okolina i aktivnosti</span></div>
-      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.5vw,76px);line-height:1.02;letter-spacing:-0.01em;margin:24px 0 0;text-wrap:balance">Planina na <em style="font-style:italic;color:#8a5a36">dohvat ruke.</em></h2>
-      <div style="position:relative;aspect-ratio:4/5;margin-top:48px;max-height:560px">
+      <div style="width:{{ okolinaFit }};max-width:100%">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.5vw,76px);line-height:1.02;letter-spacing:-0.01em;margin:24px 0 0;text-wrap:{{ okolinaWrap }}">Planina na <em style="font-style:italic;color:#8a5a36">dohvat<br>ruke.</em></h2>
+      <div style="position:relative;aspect-ratio:4/5;margin-top:48px;max-height:{{ okolinaMaxH }}">
         <img src="assets/kabina-dan.jpg" alt="Zlatiborski predeo" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+      </div>
       </div>
     </div>
     <ol style="list-style:none;margin:0;padding:0;border-top:1px solid #d3c6b2">
@@ -399,7 +401,7 @@ class Component extends DCLogic {
       navAccent: solid || layout !== 'full' ? '#93582d' : '#f0c898',
       navLine: solid || layout !== 'full' ? 'rgba(42,33,25,0.35)' : 'rgba(246,240,230,0.5)',
       navBorder: solid ? 'rgba(42,33,25,0.08)' : 'rgba(42,33,25,0)',
-      isWide: wide, isNarrow: !wide, okolinaPos: wide ? 'sticky' : 'static', menuOpen: menu && !wide,
+      isWide: wide, isNarrow: !wide, okolinaPos: wide ? 'sticky' : 'static', okolinaWrap: 'wrap', okolinaFit: wide ? 'fit-content' : '100%', okolinaMaxH: wide ? 'none' : '560px', menuOpen: menu && !wide,
       menuLabel: menu ? 'Zatvori' : 'Meni',
       toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
       closeMenu: () => this.setState({ menu: false }),
